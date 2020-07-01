@@ -15,16 +15,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - uses: actions/core
-      - run: |
-        npm install --save-dev @commitlint/cli
-        git log -1 --pretty=%B | npx commitlint
+      - name: Install Commit Lint
+        run: npm install --save-dev @commitlint/cli
+      - name: Check Commit lint
+        run: git log -1 --pretty=%B | npx commitlint
       - name: Checking if commit lint was successful
-        if: ${{ failure() }}
-        run: |
-          exit 1
-
-
+        if: failure()
+        run: exit 1
   # release:
   #   name: Release
   #   runs-on: ubuntu-18.04
