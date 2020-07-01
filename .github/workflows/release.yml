@@ -15,14 +15,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: |
-      npm install --save-dev @commitlint/cli
-      try {
-          git log -1 --pretty=%B | npx commitlint
-      } catch (error) {
-        core.setFailed(error.message);
-      }
-
+      - run: npm install --save-dev @commitlint/cli
+        if: git log -1 --pretty=%B | npx commitlint
+        if: failure()
+        run: |
+          exit 1
   # release:
   #   name: Release
   #   runs-on: ubuntu-18.04
