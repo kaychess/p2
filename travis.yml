@@ -1,0 +1,12 @@
+
+# travis.yml
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - node
+      script:
+        - npm install --save-dev
+        - commitlint-travis
+    # Other Travis jobs goes here.
+
