@@ -16,11 +16,15 @@ jobs:
         with:
           node-version: 12
       - uses: actions/core
-      - run: npm install --save-dev @commitlint/cli
-        if: git log -1 --pretty=%B | npx commitlint  ; then
+      - run: |
+        npm install --save-dev @commitlint/cli
+        git log -1 --pretty=%B | npx commitlint
+      - name: Checking if commit lint was successful
+        if: ${{ failure() }}
         run: |
-          core.setFailed('error message..');
           exit 1
+
+
   # release:
   #   name: Release
   #   runs-on: ubuntu-18.04
