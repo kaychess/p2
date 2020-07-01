@@ -159,7 +159,7 @@ jobs:
         run: npm ci
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
         run: npx semantic-release
 ' > .github/workflows/release.yml
 
@@ -168,8 +168,9 @@ echo "
         Attention ::::::::::
 
 
-        Remember you need to configure
-        a) GitHub actions tokens
+        Remember you need to perform following steps
+        a) Set Up GitHub actions tokens
+        b) GitHub actions is configured with GH_PUBLIC_TOKEN change it as needed
         b) Travis CI permissions
 
 
