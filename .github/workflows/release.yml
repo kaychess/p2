@@ -15,28 +15,30 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm install
-      - name: Add dependencies for commitlint action
-        # $GITHUB_WORKSPACE is the path to your repository
-        run: echo "::set-env name=NODE_PATH::$GITHUB_WORKSPACE/node_modules"
-      # Now the commitlint action will run considering its own dependencies and yours as well 🚀
-      - uses: wagoid/commitlint-github-action@v1
-  release:
-    name: Release
-    runs-on: ubuntu-18.04
-    needs: lint
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Check Commit lint
-        run: git log -1 --pretty=%B | npx commitlint
-      - name: Install dependencies
-        run: npm ci
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
-        run: npx semantic-release
+      - run: |
+      npm install --save-dev @commitlint/cli
+      try {
+          git log -1 --pretty=%B | npx commitlint
+      } catch (error) {
+        core.setFailed(error.message);
+      }
+
+  # release:
+  #   name: Release
+  #   runs-on: ubuntu-18.04
+  #   needs: lint
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #     - name: Check Commit lint
+  #       run: git log -1 --pretty=%B | npx commitlint
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
+  #       run: npx semantic-release
