@@ -7,5 +7,5 @@ matrix:
       script:
         - npm install --save-dev
         - commitlint-travis
-    # Other Travis jobs goes here.
+    # More jobs go here... 
 
