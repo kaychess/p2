@@ -15,10 +15,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - uses: actions/core
       - run: npm install --save-dev @commitlint/cli
-        if: git log -1 --pretty=%B | npx commitlint
-        if: failure()
+        if: git log -1 --pretty=%B | npx commitlint  ; then
         run: |
+          core.setFailed('error message..');
           exit 1
   # release:
   #   name: Release
