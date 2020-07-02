@@ -22,8 +22,8 @@ jobs:
         if: failure()
         run: |
           value=`git log -1 --pretty=%B | npx commitlint `
-          echo '${value}'
-          exit 1
+          echo $value
+          exit git log -1 --pretty=%B | npx commitlint 
         
         
 #       - name: Checking if commit lint was successful
