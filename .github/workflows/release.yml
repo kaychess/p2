@@ -6,8 +6,6 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -18,31 +16,12 @@ jobs:
           node-version: 12
       - name: Get Last committed message and check against commit lint
         run: git log -1 --pretty=%B | npx commitlint
-      - name: Checking if commit lint was successful
+      - name: Check if there is any error
         if: failure()
         run: |
-          error_message =`git log -1 --pretty=%B | npx commitlint`
-          echo $error_message
-      # - name: Checking if commit lint was successful
-      #   run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
-      # release:
-      #   name: Release
-      #   runs-on: ubuntu-18.04
-      #   needs: lint
-      #   steps:
-      #     - name: Checkout
-      #       uses: actions/checkout@v2
-      #     - name: Setup Node.js
-      #       uses: actions/setup-node@v1
-      #       with:
-      #         node-version: 12
-      #     - name: Check Commit lint
-      #       run: git log -1 --pretty=%B | npx commitlint
-      #     - name: Install dependencies
-      #       run: npm ci
-      #     - name: Release
-      #       env:
-      #         GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
-      #       run: npx semantic-release
-
-# run: echo '::set-output name=LINT_ERROR :: test'
+          echo "::error ::  Error in Git Commit Message Lint "
+          exit 1
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
+        run: npx semantic-release
