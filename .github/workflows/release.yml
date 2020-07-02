@@ -21,7 +21,8 @@ jobs:
       - name: Check if there is any error
         if: failure()
         run: |
-          echo '::error :: $(git log -1 --pretty=%B | npx commitlint)'
+          value=`git log -1 --pretty=%B | npx commitlint`
+          echo '::error :: $(value)'
           exit 1
         
         
