@@ -17,12 +17,12 @@ jobs:
         with:
           node-version: 12
       - name: Get Last committed message and check against commit lint
-        run: echo "git log -1 --pretty=%B" | npx commitlint
-      - uses: actions/toolkit
+        run: git log -1 --pretty=%B | npx commitlint
       - name: Checking if commit lint was successful
+        if: failure()
         run: |
-          value=`git log -1 --pretty=%B | npx commitlint`
-          echo $value
+          error_message =`git log -1 --pretty=%B | npx commitlint`
+          echo $error_message
       # - name: Checking if commit lint was successful
       #   run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
       # release:
