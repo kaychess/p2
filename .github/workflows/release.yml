@@ -19,11 +19,11 @@ jobs:
         run: echo "git log -1 --pretty=%B" | npx commitlint
       - name: Checking if commit lint was successful
         if: failure()
-        run: echo "::error :: Something went wrong"
-      - name: Set selected color
-        run: echo '::set-env name=SELECTED_COLOR::green'
-      - name: Get color
-        run: echo 'The selected color is' $SELECTED_COLOR
+        run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
+#       - name: Set selected color
+#         run: echo '::set-env name=SELECTED_COLOR::green'
+#       - name: Get color
+#         run: echo 'The selected color is' $SELECTED_COLOR
 # $(git log -1 --pretty=%B | npx commitlint)
   # release:
   #   name: Release
