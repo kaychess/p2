@@ -15,11 +15,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Check Commit lint
-        run: git log -1 --pretty=%B | npx commitlint
+      - name: Get Last committed message and check against commit lint
+        run: echo "git log -1 --pretty=%B" | npx commitlint
       - name: Checking if commit lint was successful
         if: failure()
-        run: exit 1
+        run: |
+        echo $status
+        exit 1
   # release:
   #   name: Release
   #   runs-on: ubuntu-18.04
