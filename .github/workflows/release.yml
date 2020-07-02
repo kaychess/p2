@@ -18,9 +18,12 @@ jobs:
           node-version: 12
       - name: Get Last committed message and check against commit lint
         run: git log -1 --pretty=%B | npx commitlint
-      - name: Set selected color
-        run: echo '::error ::something went wrong..'
-
+      - name: Check if there is any error
+        if: failure()
+        run: |
+          echo '::error :: $(git log -1 --pretty=%B | npx commitlint)'
+          exit 1
+        
         
 #       - name: Checking if commit lint was successful
 #         if: failure()
