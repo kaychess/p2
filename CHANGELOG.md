@@ -1,5 +1,19 @@
 # Semantic Versioning Changelog
 
+# [4.0.0](https://github.com/kaychess/p2/compare/v3.0.0...v4.0.0) (2020-07-02)
+
+
+### Build System
+
+* **ci:** change body max line lenght ([c01428f](https://github.com/kaychess/p2/commit/c01428ff0801c6149216b3d96de411f4d30e7b1b))
+* **ci:** change body max line lenght ([ed2627d](https://github.com/kaychess/p2/commit/ed2627d89bce1a3050e3653c40f36d95a00426c4))
+
+
+### BREAKING CHANGES
+
+* **ci:** to genereate semantic relase
+* **ci:** to gen sem relase
+
 # [3.0.0](https://github.com/kaychess/p2/compare/v2.0.0...v3.0.0) (2020-07-02)
 
 
