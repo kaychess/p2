@@ -23,6 +23,7 @@ jobs:
         run: |
           value=`git log -1 --pretty=%B | npx commitlint `
           echo $value
+          echo "::error :: $value"
           exit git log -1 --pretty=%B | npx commitlint 
         
         
