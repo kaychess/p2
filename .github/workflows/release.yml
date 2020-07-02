@@ -20,7 +20,9 @@ jobs:
         run: echo "git log -1 --pretty=%B" | npx commitlint
       - uses: actions/toolkit
       - name: Checking if commit lint was successful
-        run: echo '::set-output name=LINT_ERROR :: test'
+        run: |
+          value=`git log -1 --pretty=%B | npx commitlint`
+          echo $value
       # - name: Checking if commit lint was successful
       #   run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
       # release:
@@ -42,3 +44,5 @@ jobs:
       #       env:
       #         GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
       #       run: npx semantic-release
+
+# run: echo '::set-output name=LINT_ERROR :: test'
