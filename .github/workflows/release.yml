@@ -19,9 +19,7 @@ jobs:
         run: echo "git log -1 --pretty=%B" | npx commitlint
       - name: Checking if commit lint was successful
         if: failure()
-        run: |
-        echo $status
-        exit 1
+        run: echo $status
   # release:
   #   name: Release
   #   runs-on: ubuntu-18.04
