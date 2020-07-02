@@ -22,12 +22,11 @@ jobs:
         if: failure()
         shell: bash
         run: |
-          value=`git log -1 --pretty=%B | npx commitlint `
+          value=`git log -1 --pretty=%B | npx commitlint`
           echo $value
-          echo "::error :: $value"
+          echo "::error :: some value"
           exit git log -1 --pretty=%B | npx commitlint 
-        
-        
+
 #       - name: Checking if commit lint was successful
 #         if: failure()
 #         run: |
