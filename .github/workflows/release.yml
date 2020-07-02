@@ -18,8 +18,8 @@ jobs:
       - name: Get Last committed message and check against commit lint
         run: echo "git log -1 --pretty=%B" | npx commitlint
       - name: Checking if commit lint was successful
-        if: failure()
-        run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
+          if: failure()
+          run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
 #       - name: Set selected color
 #         run: echo '::set-env name=SELECTED_COLOR::green'
 #       - name: Get color
