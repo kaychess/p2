@@ -20,8 +20,7 @@ jobs:
         run: git log -1 --pretty=%B | npx commitlint
       - name: Set selected color
         run: echo '::error ::something went wrong..'
-      - name: Get color
-        run: echo 'The selected color is' $SELECTED_COLOR
+
         
 #       - name: Checking if commit lint was successful
 #         if: failure()
