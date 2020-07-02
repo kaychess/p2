@@ -21,9 +21,9 @@ jobs:
         run: |
           echo "::error ::  Error in Git Commit Message Lint "
           exit 1
-      - name: Install dependencies
+      - name: Install Semantic Release dependencies
         run: npm ci
-      - name: Release
+      - name: Generate if needed semantic versioning
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
         run: npx semantic-release
