@@ -1,5 +1,17 @@
 # Semantic Versioning Changelog
 
+# [3.0.0](https://github.com/kaychess/p2/compare/v2.0.0...v3.0.0) (2020-07-02)
+
+
+### Build System
+
+* **ci:** change body max line lenght ([adf8670](https://github.com/kaychess/p2/commit/adf8670e5b579f94185410471f43075cda59d3f4))
+
+
+### BREAKING CHANGES
+
+* **ci:** just to generate sem relase
+
 # [2.0.0](https://github.com/kaychess/p2/compare/v1.0.2...v2.0.0) (2020-07-02)
 
 
