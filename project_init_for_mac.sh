@@ -67,7 +67,9 @@ json -I -f package.json -e "this.config= {'commitizen': {'path': 'commitiquette'
 # install Angular Commit Conventions for commit lint
 npm install --save-dev @commitlint/config-conventional
 # setup the commit lint config files with installed configurations
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo 'module.exports = {extends: ["@commitlint/config-conventional"],
+rules: {"body-max-line-length": [1, "always", 150],},
+};' > commitlint.config.js
 
 touch travis.yml
 
@@ -145,29 +147,12 @@ on:
     branches:
       - master
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
-      - name: Add dependencies for commitlint action
-
-        run: echo "::set-env name=NODE_PATH::$GITHUB_WORKSPACE/node_modules"
-      - uses: wagoid/commitlint-github-action@v1
   release:
-    runs-on: ubuntu-latest
-    needs: lint
+    name: Release
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -179,10 +164,27 @@ jobs:
         run: |
           echo "::error ::  Error in Git Commit Message Lint "
           exit 1
-      - name: Release
+      - name: Install Semantic Release dependencies
+        run: npm ci
+      - name: If needed generate Semantic versioning
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
         run: npx semantic-release
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - name: Add dependencies for commitlint action
+  #       run: echo "::set-env name=NODE_PATH::$GITHUB_WORKSPACE/node_modules"
+  #     - uses: wagoid/commitlint-github-action@v1
 ' > .github/workflows/release.yml
 
 echo "
