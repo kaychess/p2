@@ -20,6 +20,7 @@ jobs:
         run: git log -1 --pretty=%B | npx commitlint
       - name: Check if there is any error
         if: failure()
+        shell: bash
         run: |
           value=`git log -1 --pretty=%B | npx commitlint `
           echo $value
