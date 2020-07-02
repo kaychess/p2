@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.0.2](https://github.com/kaychess/p2/compare/v1.0.1...v1.0.2) (2020-07-02)
+
+
+### Bug Fixes
+
+* change name for semantic release git actions ([d877e27](https://github.com/kaychess/p2/commit/d877e2753ba581f884d3bd35d75c1f7c10fa815f))
+
 ## [1.0.1](https://github.com/kaychess/p2/compare/v1.0.0...v1.0.1) (2020-07-02)
 
 
