@@ -23,7 +23,7 @@ jobs:
           exit 1
       - name: Install Semantic Release dependencies
         run: npm ci
-      - name: If needed generate semantic versioning
+      - name: If needed generate Semantic Versioning
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
         run: npx semantic-release
