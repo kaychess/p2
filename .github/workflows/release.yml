@@ -1,3 +1,4 @@
+
 name: Release
 on:
   push:
@@ -42,3 +43,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
         run: npx semantic-release
+

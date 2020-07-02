@@ -145,18 +145,40 @@ on:
     branches:
       - master
 jobs:
-  release:
-    name: Release
-    runs-on: ubuntu-18.04
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - name: Add dependencies for commitlint action
+
+        run: echo "::set-env name=NODE_PATH::$GITHUB_WORKSPACE/node_modules"
+      - uses: wagoid/commitlint-github-action@v1
+  release:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Install dependencies
-        run: npm ci
+      - name: Get Last committed message and check against commit lint
+        run: git log -1 --pretty=%B | npx commitlint
+      - name: Check if there is any error
+        if: failure()
+        run: |
+          echo "::error ::  Error in Git Commit Message Lint "
+          exit 1
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_TOKEN }}
