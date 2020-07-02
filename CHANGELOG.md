@@ -1,5 +1,17 @@
 # Semantic Versioning Changelog
 
+# [5.0.0](https://github.com/kaychess/p2/compare/v4.0.0...v5.0.0) (2020-07-02)
+
+
+### Build System
+
+* **ci:** one final checkup for project setups ([cb53412](https://github.com/kaychess/p2/commit/cb534123262d41bd89ec787860a19b11381088fc))
+
+
+### BREAKING CHANGES
+
+* **ci:** Trigger Semantic release
+
 # [4.0.0](https://github.com/kaychess/p2/compare/v3.0.0...v4.0.0) (2020-07-02)
 
 
