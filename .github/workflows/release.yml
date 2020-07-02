@@ -19,7 +19,7 @@ jobs:
       - name: Get Last committed message and check against commit lint
         run: git log -1 --pretty=%B | npx commitlint
       - name: Set selected color
-        run: echo '::warning ::message'
+        run: echo '::error ::something went wrong..'
       - name: Get color
         run: echo 'The selected color is' $SELECTED_COLOR
         
