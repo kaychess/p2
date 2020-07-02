@@ -19,7 +19,7 @@ jobs:
       - name: Get Last committed message and check against commit lint
         run: echo "git log -1 --pretty=%B" | npx commitlint
       - name: Checking if commit lint was successful
-        run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
+        run: echo "git log -1 --pretty=%B" | npx commitlint
       # - name: Checking if commit lint was successful
       #   run: echo "::error :: $(git log -1 --pretty=%B | npx commitlint)"
       # release:
