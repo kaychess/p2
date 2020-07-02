@@ -20,10 +20,8 @@ jobs:
         run: git log -1 --pretty=%B | npx commitlint
       - name: Check if there is any error
         if: failure()
-        shell: bash
         run: |
-          echo "::error :: some value"
-          exit 1
+          echo "::error ::  Error in Git Commit Message Lint "
 
 #       - name: Checking if commit lint was successful
 #         if: failure()
