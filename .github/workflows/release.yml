@@ -22,7 +22,7 @@ jobs:
         if: failure()
         run: |
           value=`git log -1 --pretty=%B | npx commitlint`
-          echo '::error :: $(value)'
+          echo '::error :: ${value}'
           exit 1
         
         
